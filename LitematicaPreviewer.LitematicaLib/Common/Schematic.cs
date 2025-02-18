@@ -4,12 +4,11 @@ using SharpNBT;
 
 namespace LitematicaPreviewer.LitematicaLib.Common
 {
-    public record Schematic
+    public class Schematic
     {
         public string Name { get; init; }
         public string Author { get; init; }
         public string Description { get; init; }
-        public Dictionary<string, Region> Region { get; init; } = new Dictionary<string, Region>();
         public int LmVersion { get; init; }
         public int LmSubversion { get; init; }
         public int McVersion { get; init; }
@@ -56,7 +55,7 @@ namespace LitematicaPreviewer.LitematicaLib.Common
 
             foreach (var tag in litematicaDocument.Get<CompoundTag>("Regions"))
             {
-                schematic.Region.Add(tag.Name, Common.Region.FromCompoundTag((CompoundTag)tag));
+                schematic.Regions.Add(tag.Name, Common.Region.FromCompoundTag((CompoundTag)tag));
             }
 
             return schematic;

@@ -26,7 +26,17 @@ namespace LitematicaPreviewer
         {
             InitializeComponent();
 
-            DataContext = (App.Current as App).Services.GetRequiredService<MainViewModel>();
+            DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
+        }
+
+        private void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+            if (e.Delta > 0)
+                scrollViewer.LineUp();
+            else
+                scrollViewer.LineDown();
+            e.Handled = true;
         }
     }
 }
